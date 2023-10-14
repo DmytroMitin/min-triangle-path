@@ -31,7 +31,6 @@ object MinTrianglePath {
         calcDynamicsAndBits(rows, newDyn, newBits :: bits)
     }
 
-  // rows nonempty, triangle nonempty
   def main(args: Array[String]): Unit = {
     println(minPath(List(
       List(7),

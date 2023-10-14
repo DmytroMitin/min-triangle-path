@@ -1,0 +1,2 @@
+rows nonempty
+triangle nonempty
