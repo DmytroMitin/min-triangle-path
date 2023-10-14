@@ -17,7 +17,7 @@ class MinTrianglePathTest extends munit.FunSuite {
     assertEquals(obtained, expected)
   }
 
-  def fileTriangleMinPath(fileName: String): Try[(Int, List[Int])] = {
+  private def fileTriangleMinPath(fileName: String): Try[(Int, List[Int])] = {
     val rows = Source.fromResource(fileName).getLines.toList
     parseTriangle(rows).map(minPath)
   }

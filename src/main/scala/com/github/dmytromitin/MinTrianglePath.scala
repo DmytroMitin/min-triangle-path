@@ -12,9 +12,15 @@ object MinTrianglePath {
     (dynamics.head, calcPath(triangle, bits))
   }
 
-  def calcPath(triangle: List[List[Int]], bits: List[List[Int]]): List[Int] = {
+  private def calcPath(triangle: List[List[Int]], bits: List[List[Int]]): List[Int] = {
     @tailrec
-    def calcPath1(triangle: List[List[Int]], bits: List[List[Int]], bit: Int, indexInRow: Int, res: List[Int]): List[Int] =
+    def calcPath1(
+                   triangle: List[List[Int]],
+                   bits: List[List[Int]],
+                   bit: Int,
+                   indexInRow: Int,
+                   res: List[Int]
+                 ): List[Int] =
       (triangle, bits) match {
         case (Nil, Nil) => res.reverse
         case (row :: rows, b :: bs) =>
@@ -26,7 +32,11 @@ object MinTrianglePath {
   }
 
   @tailrec
-  def calcDynamicsAndBits(reversed: List[List[Int]], dynamics: List[Int], bits: List[List[Int]]): (List[Int], List[List[Int]]) =
+  private def calcDynamicsAndBits(
+                                   reversed: List[List[Int]],
+                                   dynamics: List[Int],
+                                   bits: List[List[Int]]
+                                 ): (List[Int], List[List[Int]]) =
     reversed match {
       case Nil => (dynamics, bits)
       case row :: rows =>
@@ -46,6 +56,8 @@ object MinTrianglePath {
       command = StdIn.readLine()
       rows :+= command
     }
-    parseTriangle(rows.init).map(minPath).foreach { case (sum, path) => println(s"""Minimal path is: ${path.mkString(" + ")} = $sum""")}
+    parseTriangle(rows.init).map(minPath).foreach { case (sum, path) =>
+      println(s"""Minimal path is: ${path.mkString(" + ")} = $sum""")
+    }
   }
 }
