@@ -1,3 +1,5 @@
+package com.github.dmytromitin
+
 import scala.annotation.tailrec
 
 object MinTrianglePath {

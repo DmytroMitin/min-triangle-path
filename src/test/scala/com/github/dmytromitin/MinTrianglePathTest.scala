@@ -1,3 +1,5 @@
+package com.github.dmytromitin
+
 import MinTrianglePath.minPath
 
 class MinTrianglePathTest extends munit.FunSuite {
