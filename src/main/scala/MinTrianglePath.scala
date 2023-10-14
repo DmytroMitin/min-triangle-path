@@ -30,13 +30,4 @@ object MinTrianglePath {
         ).unzip
         calcDynamicsAndBits(rows, newDyn, newBits :: bits)
     }
-
-  def main(args: Array[String]): Unit = {
-    println(minPath(List(
-      List(7),
-      List(6, 3),
-      List(3, 8, 5),
-      List(11, 2, 10, 9),
-    )))
-  }
 }
