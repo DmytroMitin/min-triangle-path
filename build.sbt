@@ -10,4 +10,5 @@ lazy val root = (project in file("."))
       "org.typelevel" %% "cats-core" % "2.10.0",
       "org.scalameta" %% "munit" % "0.7.29" % Test,
     ),
+    assembly / assemblyJarName := "MinTrianglePath",
   )

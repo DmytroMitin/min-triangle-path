@@ -1,10 +1,9 @@
 package com.github.dmytromitin
 
 import scala.annotation.tailrec
+import scala.io.StdIn
 import scala.util.Try
 import cats.implicits._
-
-import scala.io.StdIn
 
 object MinTrianglePath {
   def minPath(triangle: List[List[Int]]): (Int, List[Int]) = {
