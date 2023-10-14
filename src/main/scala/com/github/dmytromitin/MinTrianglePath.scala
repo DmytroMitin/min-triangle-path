@@ -1,6 +1,8 @@
 package com.github.dmytromitin
 
 import scala.annotation.tailrec
+import scala.util.Try
+import cats.implicits._
 
 object MinTrianglePath {
   def minPath(triangle: List[List[Int]]): (Int, List[Int]) = {
@@ -32,4 +34,7 @@ object MinTrianglePath {
         ).unzip
         calcDynamicsAndBits(rows, newDyn, newBits :: bits)
     }
+
+  def parseTriangle(rows: List[String]): Try[List[List[Int]]] =
+    rows.traverse(_.split(" ").toList.traverse(n => Try(n.toInt)))
 }

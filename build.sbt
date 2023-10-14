@@ -7,6 +7,7 @@ lazy val root = (project in file("."))
     name := "min-triangle-path",
     organization := "com.github.dmytromitin",
     libraryDependencies ++= Seq(
+      "org.typelevel" %% "cats-core" % "2.10.0",
       "org.scalameta" %% "munit" % "0.7.29" % Test,
     ),
   )
