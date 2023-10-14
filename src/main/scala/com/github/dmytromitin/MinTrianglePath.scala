@@ -4,6 +4,8 @@ import scala.annotation.tailrec
 import scala.util.Try
 import cats.implicits._
 
+import scala.io.StdIn
+
 object MinTrianglePath {
   def minPath(triangle: List[List[Int]]): (Int, List[Int]) = {
     val reversed = triangle.reverse
@@ -37,4 +39,14 @@ object MinTrianglePath {
 
   def parseTriangle(rows: List[String]): Try[List[List[Int]]] =
     rows.traverse(_.split(" ").toList.traverse(n => Try(n.toInt)))
+
+  def main(args: Array[String]): Unit = {
+    var command = ""
+    var rows = List[String]()
+    while (command != "EOF") {
+      command = StdIn.readLine()
+      rows :+= command
+    }
+    parseTriangle(rows.init).map(minPath).foreach { case (sum, path) => println(s"""Minimal path is: ${path.mkString(" + ")} = $sum""")}
+  }
 }
