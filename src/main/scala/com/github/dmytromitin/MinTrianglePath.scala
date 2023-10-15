@@ -1,11 +1,12 @@
 package com.github.dmytromitin
 
 import scala.annotation.tailrec
-import scala.io.StdIn
 import scala.util.Try
+import cats.effect.{IO, IOApp}
+import cats.effect.std.Console
 import cats.implicits._
 
-object MinTrianglePath {
+object MinTrianglePath extends IOApp.Simple {
   def minPath(triangle: List[List[Int]]): (Int, List[Int]) = {
     val reversed = triangle.reverse
     val (dynamics, bits) = calcDynamicsAndBits(reversed, List.fill(reversed.head.length + 1)(0), Nil)
@@ -49,15 +50,16 @@ object MinTrianglePath {
   def parseTriangle(rows: List[String]): Try[List[List[Int]]] =
     rows.traverse(_.split(" ").toList.traverse(n => Try(n.toInt)))
 
-  def main(args: Array[String]): Unit = {
-    var command = ""
-    var rows = List[String]()
-    while (command != "EOF") {
-      command = StdIn.readLine()
-      rows :+= command
-    }
-    parseTriangle(rows.init).map(minPath).foreach { case (sum, path) =>
-      println(s"""Minimal path is: ${path.mkString(" + ")} = $sum""")
-    }
-  }
+  private lazy val readLines: IO[List[String]] = for {
+    s  <- Console[IO].readLine
+    ss <- if (s != "EOF") readLines else IO.pure(Nil)
+  } yield s :: ss
+
+  override val run: IO[Unit] =
+    for {
+      lines       <- readLines
+      triangle    <- IO.fromTry(parseTriangle(lines.init))
+      (sum, path) = minPath(triangle)
+      _           <- Console[IO].println(s"""Minimal path is: ${path.mkString(" + ")} = $sum""")
+    } yield ()
 }
